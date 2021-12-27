@@ -71,3 +71,8 @@ debug(r)
  }
  debug(l)
  cout<<l<<ln;
+ 
+ -------------fractional binary search-------------
+ (for fractional binary search,we have to make a loop for 100 steps,it will be enough........)
+ for(int i = 0;i<100;i++){
+ }
