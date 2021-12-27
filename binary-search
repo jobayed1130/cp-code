@@ -1,0 +1,48 @@
+---------------------normal binary-search----------------------
+     
+     int l = 0,r = n-1;
+     while(l<=r){
+         int m = (l + r)/2;
+         if(x==a[m]){
+             found = 1;
+             break;
+         }
+         else if(x<a[m]) r = m-1;
+         else l = m+1;
+ 
+     }
+     if(found) cout<<"YES"<<ln;
+     else cout<<"NO "<<ln;
+ --------------------------upper_bound-----------------------
+   l = -1,r = n;
+  while(l+1<r){
+      int m = (l+r)/2;
+      if(x<a[m]) r = m;//upper_bound
+      else l = m;
+  }
+  cout<<r<<ln;
+  
+  -----------------------lower_bound-------------------------
+     int l = -1,r = n;
+     while(l+1<r){
+         int m = (l+r)/2;
+         if(x<=a[m]) r = m;//upper_bound
+         else l = m;
+     }
+     
+   ----------------binary-search on solution(the problem can be 1 1 1 0 0 0  or 0 0 0 1 1 1 types)----------------
+   bool ok(ll x){
+    
+}
+void solve(){
+ cin>>n;
+ ll l = 1,r=1;
+ while(ok(r))r<<=2;// we increase the  value of r by 2 to check upto which number,we have to check couse in binary search we dicrease the value of r bu 2,so we have to increase by 2)
+ while(l+1<r){
+     ll m = (l+r)/2;
+
+     if(ok(m))l=m;
+     else r=m;
+ }
+
+ cout<<l<<ln;
