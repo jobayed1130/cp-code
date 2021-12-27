@@ -31,18 +31,43 @@
      }
      
    ----------------binary-search on solution(the problem can be 1 1 1 0 0 0  or 0 0 0 1 1 1 types)----------------
-   bool ok(ll x){
-    
+   if the problem 0 0 0 0 1 1 1 1 ,then the f(l)=0 and f(r)=1
+   
+bool ok(ll x){
+f(r) is true;
 }
-void solve(){
- cin>>n;
- ll l = 1,r=1;
- while(ok(r))r<<=2;// we increase the  value of r by 2 to check upto which number,we have to check couse in binary search we dicrease the value of r bu 2,so we have to increase by 2)
- while(l+1<r){
+ 
+ ll l = 0,r=1;
+
+while(!ok(r))r*=2;
+debug(r)
+ 
+ while(r>l+1){
      ll m = (l+r)/2;
-
-     if(ok(m))l=m;
-     else r=m;
+     if(ok(m))r=m;
+     else l = m;
+ 
+ 
  }
+ debug(l)
+ cout<<r<<ln;
+    if the problem 1 1 1 1 0 0 0 0  ,then the f(l)=1 and f(r)=0
+   
+bool ok(ll x){
+f(l) is true;
+}
+ 
+ ll l = 0,r=1;
 
+while(ok(r))r*=2;
+debug(r)
+ 
+ while(r>l+1){
+     ll m = (l+r)/2;
+     if(ok(m))l=m;
+     else r = m;
+ 
+ 
+ }
+ debug(l)
  cout<<l<<ln;
