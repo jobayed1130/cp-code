@@ -1,0 +1,193 @@
+ ---------------adjacency list---------------
+ vector<int>adjacency_list[1000];
+    int v,e;
+    cin>>v>>e;
+    debug(v)
+    debug(e)
+    for(int i = 0;i<e;i++){
+        int a,b;
+        cin>>a>>b;
+        adjacency_list[a].pb(b);
+        adjacency_list[b].pb(a);
+    }
+    for(int i = 1;i<=v;i++){
+        cout<<i<<": ";
+        for(int j = 0;j<adjacency_list[i].size();j++){
+            cout<<adjacency_list[i][j]<<" ";
+        }
+        cout<<ln;
+    }
+    -------------1 D graph(bfs)------------
+    int v,e;
+    cin>>v>>e;
+    vector<vector<int>>adj(v+1);
+
+    for(int i = 0;i<e;i++){
+        int a,b;
+        cin>>a>>b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    int s;
+    cin>>s;
+    vector<int>level(v+1,-1);
+    vector<int>parent(v+1,-1);
+    level[s]=0;
+    queue<int>q;
+    q.push(s);
+    while(!q.empty()){
+        int u = q.front();
+        q.pop();
+        for(int v:adj[u]){
+            if(level[v]==-1){
+                level[v] = level[u] + 1;
+                parent[v] = u;
+                q.push(v);
+            }
+        }
+    }
+
+    for(int i = 1;i<=v;i++) cout<<level[i]<<" ";
+    cout<<ln;
+    for(auto a:parent) cout<<a<<" ";
+    int b;
+    cin>>b;
+
+    vector<int>path;
+    path.push_back(b);
+    debug(path)
+    debug(b)
+    while(parent[b]!=-1){
+        path.push_back(parent[b]);
+        b = parent[b];
+    }
+    debug(path)
+    
+    ------------2D graph-------------(single source)--------
+    int n,m;
+vector<string> grid;
+bool isvalid(int x,int y){
+    if(x<n and x>=0 and y<m and y>=0 and grid[x][y]!='#') return 1;
+    return 0 ;
+}
+void solve(){
+
+    cin>>n>>m;
+
+
+
+    pair<int,int>s,d;
+   for(int i = 0;i<n;i++)
+    {
+       string c;
+       cin>>c;
+       grid.push_back(c);
+        for(int j = 0;j<m;j++){
+            if(grid[i][j]=='S') {
+                s.ff=i;
+                s.ss = j;
+            }
+            else if(grid[i][j]=='D'){
+                d.ff = i;
+                d.ss = j;
+            }
+        }
+    }
+    int level[100][100];
+    memset(level,-1,sizeof(level));
+
+    level[s.ff][s.ss]=0;
+    queue<pair<int,int>>q;
+    q.push(s);
+    int dx[]={-1 ,1,0 ,0};//directoin array
+    int dy[]={0 ,0, -1,1};//directoin array
+
+    while(!q.empty()){
+        pair<int,int> u = q.front();
+        q.pop();
+        for(int k = 0;k<4;k++){
+            pair<int,int> v = {u.ff + dx[k],u.ss + dy[k]};
+            if(isvalid(v.ff,v.ss) and level[v.ff][v.ss]==-1){
+                level[v.ff][v.ss] = level[u.ff][u.ss] + 1;
+                q.push(v);
+            }
+        }
+    }
+    debug(n)
+    debug(m)
+    for(int i = 0;i<n;i++){
+        for(int j = 0;j<m;j++) cout<<level[i][j]<<" ";
+        cout<<ln;
+    }
+    cout<<level[d.ff][d.ss]<<ln;
+}
+-------------2D graph------(multiple source)-----------
+int n,m;
+vector<string> grid;
+bool isvalid(int x,int y){
+    if(x<n and x>=0 and y<m and y>=0 and grid[x][y]!='#') return 1;
+    return 0 ;
+}
+void solve(){
+
+    cin>>n>>m;
+    queue<pair<int,int>>q;
+
+
+
+    pair<int,int>s,d;
+    int level[100][100];
+    memset(level,-1,sizeof(level));
+   for(int i = 0;i<n;i++)
+    {
+       string c;
+       cin>>c;
+       grid.push_back(c);
+        for(int j = 0;j<m;j++){
+            if(grid[i][j]=='S') {
+                s.ff=i;
+                s.ss = j;
+                q.push({s.ff,s.ss});
+                level[s.ff][s.ss]=0;
+            }
+            else if(grid[i][j]=='D'){
+                d.ff = i;
+                d.ss = j;
+            }
+        }
+    }
+
+
+
+
+
+    int dx[]={-1 ,1,0 ,0};//directoin array
+    int dy[]={0 ,0, -1,1};//directoin array
+
+    while(!q.empty()){
+        pair<int,int> u = q.front();
+        q.pop();
+        for(int k = 0;k<4;k++){
+            pair<int,int> v = {u.ff + dx[k],u.ss + dy[k]};
+            if(isvalid(v.ff,v.ss) and level[v.ff][v.ss]==-1){
+                level[v.ff][v.ss] = level[u.ff][u.ss] + 1;
+                q.push(v);
+            }
+        }
+    }
+    debug(n)
+    debug(m)
+    for(int i = 0;i<n;i++){
+        for(int j = 0;j<m;j++) cout<<level[i][j]<<" ";
+        cout<<ln;
+    }
+    cout<<level[d.ff][d.ss]<<ln;
+
+
+
+
+
+
+
+}
+    
